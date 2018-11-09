@@ -40,8 +40,11 @@ def docs(**kwargs):
             func.__apispec__ = {'parameters': [], 'responses': {}, 'docked': {}}
         extra_parameters = kwargs.pop('parameters', [])
         extra_responses = kwargs.pop('responses', {})
+        operationId = kwargs.pop('operationId', None)
         func.__apispec__['parameters'].extend(extra_parameters)
         func.__apispec__['responses'].update(extra_responses)
+        if operationId:
+            func.__apispec__['operationId'] = operationId
         func.__apispec__.update(kwargs)
         return func
 
